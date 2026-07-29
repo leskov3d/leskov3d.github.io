@@ -11,6 +11,10 @@
 </head>
 <body>
 
+<div id="preloader">
+  <div class="preloader-spinner"></div>
+</div>
+
 <nav class="nav">
   <div class="nav-inner">
     <a href="#hero" class="nav-logo">leskov3d</a>
@@ -21,18 +25,24 @@
 </nav>
 
 <div class="hero-wrap">
+  <canvas id="particles-canvas"></canvas>
+  <div class="portfolio-bg" id="portfolioBg">
+    <div class="portfolio-overlay"></div>
+    <div class="portfolio-grid" id="portfolioGrid"></div>
+  </div>
   <section id="hero" class="hero">
     <div class="hero-content">
-      <div class="hero-photo">
+      <div class="hero-photo hero-animate hero-animate--photo">
         <img src="photo.jpg" alt="Ivan Leskov">
       </div>
       <div class="hero-text">
-        <h1>Иван Лесков</h1>
-        <p class="hero-subtitle">🎨 3D визуализатор для дизайнеров</p>
-        <p class="hero-desc">
+        <h1 class="hero-animate hero-animate--title">Иван Лесков</h1>
+        <p class="hero-subtitle hero-animate hero-animate--subtitle">🎨 3D визуализатор для дизайнеров</p>
+        <p class="hero-desc hero-animate hero-animate--desc">
           Разработка фотореалистичных 3D визуализаций жилых интерьеров и офисов.
         </p>
-        <div class="hero-contacts">
+        <p class="hero-message">Напишите мне — обсудим ваш проект</p>
+        <div class="hero-contacts hero-animate hero-animate--contacts" id="heroContacts">
           <a href="mailto:leskov3d@gmail.com" class="hero-email">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
             leskov3d@gmail.com
@@ -53,11 +63,14 @@
       </div>
     </div>
   </section>
+  <div class="cta-section">
+    <button class="portfolio-btn" id="ctaBtn">Заказать визуализацию</button>
+  </div>
+  <footer class="nav footer">
+    <div class="nav-inner"></div>
+  </footer>
 </div>
 
-<footer class="nav footer">
-  <div class="nav-inner"></div>
-</footer>
-
+<script src="app.js"></script>
 </body>
 </html>
