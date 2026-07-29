@@ -159,10 +159,6 @@ document.addEventListener("DOMContentLoaded", () => {
     document.querySelector(".hero-wrap").classList.toggle("hero-hidden", window.scrollY > 200);
   });
 
-  setTimeout(() => {
-    document.querySelector(".hero-wrap").classList.add("hero-loaded");
-  }, 1800);
-
   const portfolioBtn = document.getElementById("ctaBtn");
   if (portfolioBtn) {
     portfolioBtn.addEventListener("click", () => {
@@ -207,4 +203,24 @@ document.addEventListener("DOMContentLoaded", () => {
 
 window.addEventListener("load", () => {
   document.getElementById("preloader").classList.add("loaded");
+
+  const heroPhoto = document.querySelector(".hero-photo");
+  const heroTitle = document.querySelector("h1");
+  const heroSub = document.querySelector(".hero-subtitle");
+  const heroDesc = document.querySelector(".hero-desc");
+  const heroContacts = document.querySelector(".hero-contacts");
+  const heroBtn = document.querySelector(".portfolio-btn");
+
+  heroPhoto.classList.add("hero-animate", "hero-animate--photo");
+  heroTitle.classList.add("hero-animate", "hero-animate--title");
+  heroSub.classList.add("hero-animate", "hero-animate--subtitle");
+  heroDesc.classList.add("hero-animate", "hero-animate--desc");
+  heroContacts.classList.add("hero-animate", "hero-animate--contacts");
+  heroBtn.classList.add("hero-animate", "hero-animate--btn");
+
+  document.querySelectorAll(".hero-hidden").forEach(el => el.classList.remove("hero-hidden"));
+
+  setTimeout(() => {
+    document.querySelector(".hero-wrap").classList.add("hero-loaded");
+  }, 1700);
 });
