@@ -361,11 +361,6 @@ img {
   opacity: 0;
   transition: opacity 0.6s ease;
   pointer-events: none;
-  position: fixed;
-  top: 38%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 5;
   white-space: nowrap;
   text-shadow: 0 1px 8px rgba(0,0,0,0.6);
 }
@@ -412,14 +407,23 @@ img {
 }
 
 /* Rearranged contacts (after explode) */
+.explode-center {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  pointer-events: none;
+}
+
 .hero-contacts.rearranged {
-  position: fixed !important;
-  top: 50% !important;
-  left: 50% !important;
   flex-direction: column !important;
   align-items: center !important;
   gap: 18px !important;
-  z-index: 10 !important;
   opacity: 0;
   animation: fadeInUp 0.7s ease forwards;
   flex-wrap: nowrap !important;
@@ -429,11 +433,11 @@ img {
 @keyframes fadeInUp {
   from {
     opacity: 0;
-    transform: translate(-50%, -50%) translateY(16px);
+    transform: translateY(16px);
   }
   to {
     opacity: 1;
-    transform: translate(-50%, -50%) translateY(0);
+    transform: translateY(0);
   }
 }
 
@@ -453,6 +457,13 @@ img {
 
 .portfolio-bg.visible {
   opacity: 1;
+}
+
+
+
+.hero-wrap.exploded {
+  overflow: hidden;
+  height: 100vh;
 }
 
 .portfolio-overlay {
@@ -511,12 +522,140 @@ img {
     font-size: 32px;
   }
 
+  .hero-subtitle {
+    font-size: 13px;
+    letter-spacing: 2px;
+  }
+
   .hero-desc {
     max-width: 100%;
+    font-size: 15px;
   }
 
   .hero-photo img {
     width: 160px;
     height: 160px;
+  }
+
+  .hero-contacts {
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .hero-email,
+  .hero-social {
+    font-size: 13px;
+    padding: 5px 12px;
+  }
+
+  .portfolio-row img {
+    height: 250px;
+  }
+
+  .explode-photo {
+    transform: translateX(-120px) rotate(-10deg) !important;
+  }
+
+  .explode-title {
+    transform: translateY(-80px) !important;
+  }
+
+  .explode-subtitle {
+    transform: translate(40px, -50px) !important;
+  }
+
+  .explode-desc {
+    transform: translateX(120px) !important;
+  }
+
+  .hero-contacts.rearranged {
+    gap: 14px !important;
+  }
+
+  .hero-message {
+    font-size: 15px;
+  }
+
+  .explode-center {
+    gap: 20px;
+  }
+
+  .hero {
+    padding: 70px 16px 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-text h1 {
+    font-size: 28px;
+  }
+
+  .hero-subtitle {
+    font-size: 11px;
+    letter-spacing: 1.5px;
+  }
+
+  .hero-desc {
+    font-size: 14px;
+  }
+
+  .hero-photo img {
+    width: 130px;
+    height: 130px;
+  }
+
+  .hero-contacts {
+    gap: 8px;
+  }
+
+  .hero-email,
+  .hero-social {
+    font-size: 12px;
+    padding: 4px 10px;
+  }
+
+  .portfolio-row img {
+    height: 200px;
+  }
+
+  .explode-photo {
+    transform: translateX(-80px) rotate(-8deg) !important;
+  }
+
+  .explode-title {
+    transform: translateY(-60px) !important;
+  }
+
+  .explode-subtitle {
+    transform: translate(20px, -40px) !important;
+  }
+
+  .explode-desc {
+    transform: translateX(80px) !important;
+  }
+
+  .hero-contacts.rearranged {
+    gap: 12px !important;
+  }
+
+  .hero-message {
+    font-size: 14px;
+  }
+
+  .explode-center {
+    gap: 16px;
+  }
+
+  .hero {
+    padding: 60px 12px 12px;
+  }
+
+  .cta-section {
+    padding: 16px;
+  }
+
+  .portfolio-btn {
+    padding: 12px 28px;
+    font-size: 14px;
   }
 }

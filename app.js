@@ -169,6 +169,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (exploded) return;
       exploded = true;
 
+      document.querySelector(".hero-wrap").classList.add("exploded");
       document.querySelector(".hero-photo").classList.add("explode-photo");
       document.querySelector("h1").classList.add("explode-title");
       document.querySelector(".hero-subtitle").classList.add("explode-subtitle");
@@ -183,9 +184,16 @@ document.addEventListener("DOMContentLoaded", () => {
       });
 
       setTimeout(() => {
-        document.querySelector(".hero-contacts").classList.remove("explode-contacts");
-        document.querySelector(".hero-contacts").classList.add("rearranged");
-        document.querySelector(".hero-message").classList.add("visible");
+        const msg = document.querySelector(".hero-message");
+        const contacts = document.querySelector(".hero-contacts");
+        const wrap = document.createElement("div");
+        wrap.className = "explode-center";
+        contacts.parentNode.insertBefore(wrap, contacts);
+        wrap.appendChild(msg);
+        wrap.appendChild(contacts);
+        contacts.classList.remove("explode-contacts");
+        contacts.classList.add("rearranged");
+        msg.classList.add("visible");
       }, 900);
     });
   }
