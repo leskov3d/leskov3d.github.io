@@ -417,7 +417,6 @@ img {
   flex-direction: column;
   align-items: center;
   gap: 24px;
-  pointer-events: none;
 }
 
 .hero-contacts.rearranged {
