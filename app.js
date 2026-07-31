@@ -219,15 +219,25 @@ document.addEventListener("DOMContentLoaded", () => {
   const startHero = () => {
     document.getElementById("preloader").classList.add("loaded");
 
-    document.querySelector(".hero-photo").classList.add("hero-animate", "hero-animate--photo");
-    document.querySelector("h1").classList.add("hero-animate", "hero-animate--title");
-    document.querySelector(".hero-subtitle").classList.add("hero-animate", "hero-animate--subtitle");
-    document.querySelector(".hero-desc").classList.add("hero-animate", "hero-animate--desc");
-    document.querySelector(".hero-contacts").classList.add("hero-animate", "hero-animate--contacts");
+    const heroPhoto = document.querySelector(".hero-photo");
+    const heroTitle = document.querySelector("h1");
+    const heroSub = document.querySelector(".hero-subtitle");
+    const heroDesc = document.querySelector(".hero-desc");
+    const heroContacts = document.querySelector(".hero-contacts");
 
-    document.querySelectorAll(".hero-hidden").forEach(el => {
-      if (el.id !== "ctaBtn") el.classList.remove("hero-hidden");
+    heroPhoto.classList.add("hero-animate", "hero-animate--photo");
+    heroTitle.classList.add("hero-animate", "hero-animate--title");
+    heroSub.classList.add("hero-animate", "hero-animate--subtitle");
+    heroDesc.classList.add("hero-animate", "hero-animate--desc");
+    heroContacts.classList.add("hero-animate", "hero-animate--contacts");
+
+    [heroPhoto, heroTitle, heroSub, heroDesc].forEach(el => {
+      el.classList.remove("hero-hidden");
     });
+
+    setTimeout(() => {
+      heroContacts.classList.remove("hero-hidden");
+    }, 1000);
 
     setTimeout(() => {
       document.querySelector(".hero-wrap").classList.add("hero-loaded");
@@ -244,7 +254,7 @@ document.addEventListener("DOMContentLoaded", () => {
   whenPortfolioReady().then(() => {
     const btn = document.getElementById("ctaBtn");
     btn.classList.add("hero-animate", "hero-animate--btn");
-    btn.classList.remove("hero-hidden");
+    btn.addEventListener("animationend", () => btn.classList.remove("hero-hidden"), { once: true });
   });
 
   document.querySelector(".nav-logo").addEventListener("click", () => location.reload());
