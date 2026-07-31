@@ -59,6 +59,9 @@ function shuffle(arr) {
   return arr;
 }
 
+let portfolioReady = false;
+let portfolioPromise = null;
+
 function buildPortfolioGrid() {
   const grid = document.getElementById("portfolioGrid");
   if (!grid) return;
@@ -131,6 +134,7 @@ function buildPortfolioGrid() {
 
   const rows = 8;
   const chunkSize = Math.ceil(allFiles.length / rows);
+  const imgPromises = [];
   for (let r = 0; r < rows; r++) {
     const chunk = allFiles.slice(r * chunkSize, (r + 1) * chunkSize);
     const row = document.createElement("div");
@@ -140,6 +144,11 @@ function buildPortfolioGrid() {
       img.src = src;
       img.alt = "";
       row.appendChild(img);
+      imgPromises.push(new Promise(resolve => {
+        if (img.complete) resolve();
+        img.addEventListener("load", () => resolve(), { once: true });
+        img.addEventListener("error", () => resolve(), { once: true });
+      }));
     });
     grid.appendChild(row);
   }
@@ -148,6 +157,15 @@ function buildPortfolioGrid() {
   [...grid.children].forEach(row => {
     grid.appendChild(row.cloneNode(true));
   });
+
+  portfolioPromise = Promise.all(imgPromises).then(() => {
+    portfolioReady = true;
+  });
+}
+
+function whenPortfolioReady() {
+  if (portfolioReady) return Promise.resolve();
+  return portfolioPromise || Promise.resolve();
 }
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -174,9 +192,12 @@ document.addEventListener("DOMContentLoaded", () => {
       document.querySelector(".hero-contacts").classList.add("explode-contacts");
 
       const bg = document.getElementById("portfolioBg");
-      bg.classList.add("visible");
-      bg.querySelectorAll(".portfolio-row").forEach((row) => {
-        row.style.animation = "slideRow 180s linear infinite";
+
+      whenPortfolioReady().then(() => {
+        bg.classList.add("visible");
+        bg.querySelectorAll(".portfolio-row").forEach((row) => {
+          row.style.animation = "slideRow 180s linear infinite";
+        });
       });
 
       setTimeout(() => {
@@ -194,7 +215,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  buildPortfolioGrid();
   initParticles();
 
   document.querySelector(".nav-logo").addEventListener("click", () => location.reload());
@@ -219,6 +239,8 @@ window.addEventListener("load", () => {
   heroBtn.classList.add("hero-animate", "hero-animate--btn");
 
   document.querySelectorAll(".hero-hidden").forEach(el => el.classList.remove("hero-hidden"));
+
+  buildPortfolioGrid();
 
   setTimeout(() => {
     document.querySelector(".hero-wrap").classList.add("hero-loaded");
